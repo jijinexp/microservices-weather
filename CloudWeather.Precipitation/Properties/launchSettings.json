@@ -12,7 +12,7 @@
     "CloudWeather.Precipitation": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:4001;http://localhost:4001",
+      "applicationUrl": "https://localhost:4001;http://localhost:4000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
