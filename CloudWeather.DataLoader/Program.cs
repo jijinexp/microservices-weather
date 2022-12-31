@@ -8,13 +8,13 @@ IConfiguration config = new ConfigurationBuilder()
 
 var servicesConfig = config.GetSection("Services");
 
-var tempServiceConfig = servicesConfig["Temperature"];
-var tempServiceHost = servicesConfig["Host"];
-var tempServicePort = servicesConfig["Port"];
+var tempServiceConfig = servicesConfig.GetSection("Temperature");
+var tempServiceHost = tempServiceConfig["Host"];
+var tempServicePort = tempServiceConfig["Port"];
 
-var precipServiceConfig = servicesConfig["Precipitation"];
-var precipServiceHost = servicesConfig["Host"];
-var precipServicePort = servicesConfig["Port"];
+var precipServiceConfig = servicesConfig.GetSection("Precipitation");
+var precipServiceHost = precipServiceConfig["Host"];
+var precipServicePort = precipServiceConfig["Port"];
 
 var zipCodes = new List<string> {
     "73026",
@@ -85,7 +85,7 @@ void PostPrecip(int lowTemp, string zip, DateTime day, HttpClient httpClient)
         };
     }
 
-    var precipResponse = httpClient.PostAsJsonAsync("observaion", precipitation).Result;
+    var precipResponse = httpClient.PostAsJsonAsync("observation", precipitation).Result;
 
     if (precipResponse.IsSuccessStatusCode)
     {
@@ -112,7 +112,7 @@ List<int> PostTemp(string zip, DateTime day, HttpClient httpClient)
         CreatedOn = day
     };
 
-    var tempResponse = httpClient.PostAsJsonAsync("observaion", temperatureObservation).Result;
+    var tempResponse = httpClient.PostAsJsonAsync("observation", temperatureObservation).Result;
 
     if(tempResponse.IsSuccessStatusCode){
         Console.WriteLine($"Posted Temperature: Date: {day:d} " +
